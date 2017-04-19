@@ -342,7 +342,7 @@ passing all command-line arguments that are required for that project to
 `doctest`.  A simple example looks like this:
 
 ```haskell
--- file doctests.hs
+-- file doctests/doctests.hs
 import Test.DocTest
 main = doctest ["-isrc", "src/Main.hs"]
 ```
@@ -350,10 +350,13 @@ main = doctest ["-isrc", "src/Main.hs"]
 And a corresponding Cabal test suite section like this:
 
     test-suite doctests
-      type:          exitcode-stdio-1.0
-      ghc-options:   -threaded
-      main-is:       doctests.hs
-      build-depends: base, doctest >= 0.8
+      default-language: Haskell2010
+      type:             exitcode-stdio-1.0
+      ghc-options:      -threaded
+      hs-source-dirs:   doctests
+      main-is:          doctests.hs
+      build-depends:    base
+                      , doctest >= 0.8
 
 ## Doctest in the wild
 
